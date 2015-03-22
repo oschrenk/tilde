@@ -1,5 +1,7 @@
 function __tilde_help
   echo "Unrecognized command."
+  echo ""
+  echo Usage: tilde <COMMAND> [OPTIONS]
 end
 
 function __tilde_ignore_patterns
