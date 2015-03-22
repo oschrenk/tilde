@@ -39,7 +39,7 @@ function __tilde_clone
 end
 
 function __tilde_link
-  echo $argv | read -l symlink_dir tilde_home repo_name
+  echo $argv | read -l dotfiles_home tilde_home repo_name
 
   set -l tilde_repo $tilde_home/$repo_name
 
@@ -48,13 +48,13 @@ function __tilde_link
     return
   end
 
-  echo "Syncing $tilde_repo with $symlink_dir"
+  echo "Syncing $tilde_repo with $dotfiles_home"
   echo ""
 
   for file in (__tilde_linkable_files $tilde_repo)
     set -l base_name (basename $file)
     set -l source_path $file
-    set -l target_path $symlink_dir/$base_name
+    set -l target_path $dotfiles_home/$base_name
 
     if test -L $target_path
       echo "Skipped $source_path: Already exists as symbolic link"
@@ -70,8 +70,9 @@ end
 function tilde --description  "node-deja implemented in fish"
 
   # tilde default settings
-  set -l symlink_dir $HOME
-  set -l tilde_home $HOME/.deja
+  # make sure dotfiles_home doesn't end in /
+  set -l dotfiles_home (dirname $HOME/.)
+  set -l tilde_home $dotfiles_home/.deja
 
   if not test -d $tilde_home
     echo "No $tilde_home directory found. Exiting."
@@ -92,7 +93,9 @@ function tilde --description  "node-deja implemented in fish"
 
   switch $subcommand
     case "link"
-      __tilde_link $symlink_dir $tilde_home $argument_1
+      __tilde_link  $dotfiles_home $tilde_home $argument_1
+    case "ls"
+      __tilde_ls    $dotfiles_home $tilde_home $argument_1
     case "clone"
       __tilde_clone $tilde_home $argument_1 $argument_2
   end
