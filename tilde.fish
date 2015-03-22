@@ -5,8 +5,8 @@ function __tilde_help
 end
 
 function __tilde_ignore_patterns
-  set -l tilde_repo $argv[1]
-  set -l tilde_ignore_file $tilde_repo/.tildeignore
+  set -l tilde_dir $argv[1]
+  set -l tilde_ignore_file $tilde_dir/.tildeignore
 
   if test -e $tilde_ignore_file
     paste -s -d" " (sed '/^[[:space:]]*$/d' $tilde_ignore_file | awk '{print " ! -name \""$0"\""}' | psub)
@@ -16,12 +16,12 @@ function __tilde_ignore_patterns
 end
 
 function __tilde_linkable_files
-  set -l tilde_repo $argv[1]
+  set -l dir $argv[1]
   set -l default_ignore_patterns '! -name ".git" ! -name ".tilde" ! -name ".tildeignore"'
-  set -l dynamic_ignore_patterns (__tilde_ignore_patterns $tilde_repo)
+  set -l dynamic_ignore_patterns (__tilde_ignore_patterns $dir)
   set -l search_patterns "-depth 1 \\( -name '*' $default_ignore_patterns $dynamic_ignore_patterns \\)"
 
-  eval find $tilde_repo "$search_patterns"
+  eval find $dir "$search_patterns"
 end
 
 function __tilde_clone
