@@ -59,7 +59,7 @@ function __tilde_link
       echo "Skipped $source_path: Already exists as regular file"
     else
       echo "Symlinking $target_path to $source_path"
-      # ln -s $source_path $target_path
+      ln -s $source_path $target_path
     end
   end
 end
