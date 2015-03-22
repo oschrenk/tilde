@@ -78,13 +78,13 @@ function tilde --description  "node-deja implemented in fish"
 
   echo $argv | read -l subcommand argument_1 argument_2
 
+  if test -z $argument_1
+    __tilde_help
+    return
+  end
+
   switch $subcommand
     case "link"
-      if test -z $argument_1
-        __tilde_help
-        return
-      end
-
       __tilde_link $tilde_home $argument_1
     case "clone"
       __tilde_clone $tilde_home $argument_1 $argument_2
