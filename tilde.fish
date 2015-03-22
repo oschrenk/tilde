@@ -76,6 +76,7 @@ function tilde --description  "node-deja implemented in fish"
 
   if not test -d $tilde_home
     echo "No $tilde_home directory found. Exiting."
+    # TODO offer to create dir
     return
   end
 
