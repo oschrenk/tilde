@@ -62,7 +62,7 @@ function tilde --description  "node-deja implemented in fish"
     return
   end
 
-  if test (count $argv) -ne 2
+  if test \( (count $argv) -ge 4 -o  (count $argv) -le 2 \)
     __tilde_help
     return
   end
@@ -71,6 +71,11 @@ function tilde --description  "node-deja implemented in fish"
   set -l argument $argv[2]
 
   if [ "$subcommand" = "link" ]
+    if test (count $argv) -ne 2
+      __tilde_help
+      return
+    end
+
     __tilde_link $tilde_home $argument
   end
 end
