@@ -52,7 +52,6 @@ function __tilde_link
     set -l source_path $file
     set -l target_path $symlink_dir/$base_name
 
-    # TODO test if trying to symlink .tilde
     if test -L $target_path
       echo "Skipped $source_path: Already exists as symbolic link"
     else if test -f $target_path
