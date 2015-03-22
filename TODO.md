@@ -1,9 +1,5 @@
 ## TODO
 
-Implemented commands:
-
-- `link <REPO NAME>`
-
 Not implemented commands but in scope:
 
 - `clone <GIT REPO URL>`
