@@ -24,6 +24,16 @@ function __tilde_linkable_files
   eval find $tilde_repo "$search_patterns"
 end
 
+function __tilde_clone
+  echo $argv | read -l tilde_home original_repo_name local_repo_name
+  if test -z $local_repo_name
+    set local_repo_name (basename $original_repo_name)
+  end
+
+  set -l repo_url "git@github.com:$original_repo_name.git"
+  git clone $repo_url $tilde_home/$local_repo_name
+end
+
 function __tilde_link
   set -l symlink_dir $HOME
   set -l tilde_home $argv[1]
@@ -62,20 +72,22 @@ function tilde --description  "node-deja implemented in fish"
     return
   end
 
-  if test \( (count $argv) -ge 4 -o  (count $argv) -le 2 \)
+  if test \( (count $argv) -ge 4 -o  (count $argv) -lt 2 \)
     __tilde_help
     return
   end
 
-  set -l subcommand $argv[1]
-  set -l argument $argv[2]
+  echo $argv | read -l subcommand argument_1 argument_2
 
-  if [ "$subcommand" = "link" ]
-    if test (count $argv) -ne 2
-      __tilde_help
-      return
-    end
+  switch $subcommand
+    case "link"
+      if test (count $argv) -ne 2
+        __tilde_help
+        return
+      end
 
-    __tilde_link $tilde_home $argument
+      __tilde_link $tilde_home $argument_1
+    case "clone"
+      __tilde_clone $tilde_home $argument_1 $argument_2
   end
 end
