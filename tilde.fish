@@ -80,7 +80,7 @@ function tilde --description  "node-deja implemented in fish"
 
   switch $subcommand
     case "link"
-      if test (count $argv) -ne 2
+      if test -z $argument_1
         __tilde_help
         return
       end
