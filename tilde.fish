@@ -26,6 +26,7 @@ end
 
 function __tilde_clone
   echo $argv | read -l tilde_home original_repo_name local_repo_name
+
   if test -z $local_repo_name
     set local_repo_name (basename $original_repo_name)
   end
@@ -35,9 +36,9 @@ function __tilde_clone
 end
 
 function __tilde_link
-  set -l symlink_dir $HOME
-  set -l tilde_home $argv[1]
-  set -l tilde_repo $tilde_home/$argv[2]
+  echo $argv | read -l symlink_dir tilde_home repo_name
+
+  set -l tilde_repo $tilde_home/$repo_name
 
   if not test -d $tilde_repo
     echo "No $tilde_repo directory found. Exiting."
@@ -64,6 +65,9 @@ function __tilde_link
 end
 
 function tilde --description  "node-deja implemented in fish"
+
+  # tilde default settings
+  set -l symlink_dir $HOME
   set -l tilde_home $HOME/.deja
 
   if not test -d $tilde_home
@@ -85,7 +89,7 @@ function tilde --description  "node-deja implemented in fish"
 
   switch $subcommand
     case "link"
-      __tilde_link $tilde_home $argument_1
+      __tilde_link $symlink_dir $tilde_home $argument_1
     case "clone"
       __tilde_clone $tilde_home $argument_1 $argument_2
   end
