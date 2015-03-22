@@ -2,6 +2,12 @@ function __tilde_help
   echo "Unrecognized command."
   echo ""
   echo "Usage: tilde <COMMAND> [OPTIONS]"
+  echo ""
+  echo "Commands:"
+  echo ""
+  echo " clone <GIT REPO NAME>"
+  echo " link <REPO NAME>"
+  echo ""
 end
 
 function __tilde_ignore_patterns
