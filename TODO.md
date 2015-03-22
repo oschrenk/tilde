@@ -2,7 +2,6 @@
 
 Not implemented commands but in scope:
 
-- `clone <GIT REPO URL>`
 - `ls [REPO NAME][/SUBDIRECTORY]`
 - `pull <REPO NAME>`
 - `rm <REPO NAME>`

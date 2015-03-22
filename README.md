@@ -11,6 +11,7 @@ tilde is a fish shell only replacement for [node-deja](https://github.com/mcante
 Implemented commands:
 
 - `link <REPO NAME>`
+- `clone <GITHUB REPO NAME>`
 
 ## Install
 
