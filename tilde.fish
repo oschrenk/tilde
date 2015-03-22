@@ -8,7 +8,7 @@ function __tilde_ignore_patterns
   set -l tilde_repo $argv[1]
   set -l tilde_ignore_file $tilde_repo/.tildeignore
 
-  if test -e $ignore_file
+  if test -e $tilde_ignore_file
     paste -s -d" " (sed '/^[[:space:]]*$/d' $tilde_ignore_file | awk '{print " ! -name \""$0"\""}' | psub)
   else
     return
