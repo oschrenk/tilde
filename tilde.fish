@@ -11,7 +11,7 @@ function __tilde_help
 end
 
 function __tilde_ignore_patterns
-  set -l tilde_dir $argv[1]i
+  set -l tilde_dir $argv[1]
   # TODO it might be a good idea to merge .tildeignore files from various levels
   # At the moment it only really reads ignores for current directory. Perhaps
   # we should merge with some sort of global ignores and repo ignores
